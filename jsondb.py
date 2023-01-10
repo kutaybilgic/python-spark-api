@@ -30,9 +30,10 @@ def write_json(db, data):
     # with open(filename, 'w') as f:
     #     json.dump(data.__dict__, f, cls=UUIDEncoder)
 
-def find_movie(movie_name):
-    movieDb = read_json('moviesDb.json')
-    for movie in movieDb:
-        if movie['series_Title'] == movie_name:
-            return movie
+def find_movie(db, productName):
+    print("Kutay")
+    productDb = read_json(db)
+    for product in productDb:
+        if product['Series_Title'] == productName:
+            return product
     return None

@@ -26,8 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-#spark = SparkSession.builder.appName("API").getOrCreate()
+# spark = SparkSession.builder.appName("API").getOrCreate()
 
 movieDb: List[Movies] = []
 
@@ -39,7 +38,18 @@ for movie in moviedbfile:
     a = Movies(**movie)
     movieDb.append(a)
 
+@app.get("/")
+async def root():
+    return {"Hello"}
+
 # get all products from productdb
 @app.get("/movies")
 async def get_movies():
     return movieDb
+
+
+# get all products from productdb
+@app.get("/movies/{Series_Title}")
+async def get_movie(Series_Title: str):
+    return jsondb.find_movie("moviesDb.json", Series_Title)
+
